@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us</title>
+  <!-- Import Kanit font -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/gamesuitelogo.png">
+  <style>
+    body {
+      background-color: #778dfc;
+      font-family: 'Kanit', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: white;
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: auto;
+      height: auto;
+    }
+
+    .logo {
+      width: 250px;
+      height: auto;
+    }
+
+    .content {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    .title {
+      font-size: 2rem;
+      margin-top: 0;
+    }
+
+    .member-list {
+      font-size: 1.2rem;
+      margin-top: 30px;
+    }
+
+    .member-list ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .member-list li {
+      margin: 10px 0;
+    }
+
+    /* Orewastrikerda image */
+    .member-image {
+      margin-top: 30px;
+    }
+
+    .member-image img {
+      width: 300px; /* Adjust size as needed */
+      height: auto;
+      border-radius: 10px;
+    }
+
+    /* Back Button with adjustable position and size */
+    .about-back-btn {
+      position: absolute;
+      bottom: 40px;
+      left: 1670px;
+      display: block;
+      width: 120px;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .about-back-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .about-back-btn img {
+      width: 100%;
+      height: auto;
+      display: block;
+
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo -->
+  <div class="logo-container">
+    <img src="/images/gamesuitelogoleft.png" alt="Game Suite Logo" class="logo" />
+  </div>
+
+  <!-- Page Content -->
+  <div class="content">
+    <div class="title">
+      <h1>About Us</h1>
+    </div>
+
+    <!-- Member List -->
+    <div class="member-list">
+      <h2>Project Members:</h2>
+      <ul>
+        <li>KELOMPOK POWER RANGER MERAH </li>
+        <li>Marco Benedictus Tirtaatmadja 202304560040 </li>
+        <li>Leader Siahaan 202304560036 </li>
+        <li>Darren Renault Emmanuele Simauw 202304560018 </li>
+      </ul>
+    </div>
+
+  <!-- Back Button -->
+  <a href="/dashboard" class="about-back-btn">
+    <img src="/images/backbutton.png" alt="Back Button">
+  </a>
+
+</body>
+</html>

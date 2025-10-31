@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Inbox</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/gamesuitelologo.png">
+  <style>
+    body {
+      background-color: #778dfc;
+      font-family: 'Kanit', sans-serif;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .logo {
+      width: 250px;
+    }
+
+    .header-image {
+      width: 500px;
+      margin: 30px auto 20px auto;
+      display: block;
+    }
+
+    .inbox-container {
+      max-width: 600px;
+      margin: 100px auto;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 15px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .chat-user {
+      display: flex;
+      align-items: center;
+      background-color: white;
+      color: black;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+
+    .chat-user:hover {
+      background-color: #f0f0f0;
+    }
+
+    .chat-user img {
+      width: 30px;
+      height: 30px;
+      margin-right: 15px;
+    }
+
+    .user-info {
+      flex-grow: 1;
+    }
+
+    .last-message {
+      font-size: 0.9em;
+      color: gray;
+    }
+
+    .timestamp {
+      font-size: 0.8em;
+      text-align: right;
+      white-space: nowrap;
+      color: #666;
+    }
+
+    .back-image {
+      display: block;
+      margin: 40px auto 0 auto;
+      width: 110px;
+      transition: transform 0.3s;
+    }
+
+    .back-image:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-container">
+    <img src="/images/gamesuitelogoleft.png" alt="Logo" class="logo">
+  </div>
+
+  <img src="/images/roomreservationheader.png" alt="Header" class="header-image">
+
+  <div class="inbox-container">
+    <h2>Admin Inbox</h2>
+
+    <% users.forEach(user => { %>
+      <a href="/misc/chat/<%= user.username %>" class="chat-user">
+        <img src="/images/chaticon.png" alt="Chat">
+        <div class="user-info">
+          <strong><%= user.username %></strong><br>
+          <span class="last-message"><%= user.lastMessage %></span>
+        </div>
+        <div class="timestamp"><%= user.timestamp %></div>
+      </a>
+    <% }) %>
+  </div>
+
+  <a href="/admin/admindashboard">
+    <img src="/images/backbutton.png" alt="Back" class="back-image">
+  </a>
+</body>
+</html>

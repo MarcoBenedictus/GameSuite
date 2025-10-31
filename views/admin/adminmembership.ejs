@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Admin Membership</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/gamesuitelogo.png">
+  <style>
+    body {
+      font-family: 'Kanit', sans-serif;
+      /* Change font to Kanit */
+      padding: 20px;
+      margin: 0;
+      background-color: #778dfc;
+      /* Set background color to match other page */
+      color: white;
+      /* Set text color to white for contrast */
+    }
+
+    .container {
+      max-height: 600px;
+      overflow-y: auto;
+      border: 1px solid #001fbb;
+      padding: 15px;
+      background: #4e5dad;
+      /* White background for the content area */
+      border-radius: 10px;
+    }
+
+    .card {
+      border: 1px solid #abb9ff;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      background: #abb9ff;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+      color: black;
+      /* Slightly darker color for labels */
+    }
+
+    select,
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 3px;
+      border-radius: 4px;
+      box-sizing: border-box;
+      border: 1px solid #d1f1ff;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+
+    .btns {
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 6px 10px;
+      margin-right: 5px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .edit-btn {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .delete-btn {
+      background: #f44336;
+      color: white;
+    }
+
+    .username {
+      font-weight: bold;
+      padding: 8px;
+      margin-top: 3px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      color: black;
+    }
+
+    .back-button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      width: 120px;
+      /* Adjust size as needed */
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .back-button:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Admin Membership Dashboard</h1>
+  <div class="container">
+    <% memberships.forEach(member=> { %>
+      <div class="card">
+        <form action="/admin/adminmembership/update/<%= member._id %>" method="POST">
+          <label>User:</label>
+          <p class="username">
+            <%= member.userId.username %>
+          </p>
+
+          <label>Membership Type:</label>
+          <select name="membership">
+            <option value="Basic" <%=member.membership==='Basic' ? 'selected' : '' %>>Basic</option>
+            <option value="Premium" <%=member.membership==='Premium' ? 'selected' : '' %>>Premium</option>
+            <option value="Deluxe" <%=member.membership==='Deluxe' ? 'selected' : '' %>>Deluxe</option>
+          </select>
+
+          <label>Duration (in days):</label>
+          <input type="number" name="durationInDays" value="<%= member.durationInDays %>" />
+
+          <label>Active:</label>
+          <select name="isActive">
+            <option value="true" <%=member.isActive ? 'selected' : '' %>>Yes</option>
+            <option value="false" <%=!member.isActive ? 'selected' : '' %>>No</option>
+          </select>
+
+          <div class="btns">
+            <button type="submit" class="edit-btn">Update</button>
+        </form>
+        <form action="/admin/adminmembership/delete/<%= member._id %>" method="POST" style="display:inline;">
+          <button type="submit" class="delete-btn">Delete</button>
+        </form>
+      </div>
+  </div>
+  <% }) %>
+
+    </div>
+    <div class="back-button-container">
+      <a href="/admin/admindashboard"> <!-- Adjust the href as needed -->
+        <img src="/images/backbutton.png" alt="Back" class="back-button">
+      </a>
+    </div>
+
+</body>
+
+</html>

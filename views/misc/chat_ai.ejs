@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Chat with AI</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/gamesuitelogo.png">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    body {
+      background-color: #778dfc;
+      font-family: 'Kanit', sans-serif;
+      text-align: center;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    #chat {
+      max-width: 600px;
+      margin: 50px auto;
+      background: white;
+      color: black;
+      padding: 20px;
+      height: 400px;
+      overflow-y: auto;
+      border-radius: 10px;
+      text-align: left;
+    }
+
+    #chat div {
+      margin-bottom: 10px;
+    }
+
+    #chatForm {
+      margin-top: 20px;
+    }
+
+    #message {
+      padding: 10px;
+      width: 60%;
+      border-radius: 8px;
+      border: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      background-color: #334ac0;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #253899;
+    }
+
+    .clear-button {
+      background-color: #ff4c4c;
+    }
+
+    .clear-button:hover {
+      background-color: #cc0000;
+    }
+
+    .back-image {
+      width: 110px;
+      transition: transform 0.3s;
+    }
+
+    .back-image:hover {
+      transform: scale(1.05);
+    }
+
+    .bottom-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>AI Chatbot (Powered by Gemini)</h2>
+  <h2>Information Displayed here may not be Accurate</h2>
+
+  <!-- ✅ Chat container with old messages rendered from MongoDB -->
+  <div id="chat">
+    <% if (messages && messages.length) { messages.forEach(msg => { %>
+      <div><strong><%= msg.sender === username ? 'You' : 'AI' %>:</strong> <%= msg.message %></div>
+    <% }) } %>
+  </div>
+
+  <!-- ✅ Chat input -->
+  <form id="chatForm">
+    <input id="message" placeholder="Ask me something..." />
+    <button type="submit">Send</button>
+  </form>
+
+  <!-- ✅ Buttons container -->
+  <div class="bottom-buttons">
+    <button id="clearChatBtn" class="clear-button">Clear Chat</button>
+    <a href="/misc/inbox">
+      <img src="/images/backbutton.png" alt="Back" class="back-image" />
+    </a>
+  </div>
+
+  <!-- ✅ Script to send messages to the server and display AI response -->
+  <script>
+    const chat = document.getElementById('chat');
+
+    document.getElementById('chatForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const input = document.getElementById('message');
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      const userDiv = document.createElement('div');
+      userDiv.innerHTML = `<strong>You:</strong> ${msg}`;
+      chat.appendChild(userDiv);
+
+      try {
+        const res = await axios.post('/api/chat/ai', { message: msg });
+        const markdown = marked.parse(res.data.reply);
+        const botDiv = document.createElement('div');
+        botDiv.innerHTML = `<strong>AI:</strong> ${markdown}`;
+        chat.appendChild(botDiv);
+      } catch (err) {
+        const errDiv = document.createElement('div');
+        errDiv.innerHTML = `<strong>AI:</strong> (Error receiving response)`;
+        chat.appendChild(errDiv);
+      }
+
+      chat.scrollTop = chat.scrollHeight;
+      input.value = '';
+    });
+
+    // ✅ Clear Chat Logic
+    document.getElementById('clearChatBtn').addEventListener('click', async function () {
+      if (confirm("Clear chat history with AI?")) {
+        chat.innerHTML = '';
+        try {
+          await axios.post('/api/chat/ai/clear');
+        } catch (err) {
+          alert('Failed to clear chat from server.');
+        }
+      }
+    });
+  </script>
+</body>
+</html>

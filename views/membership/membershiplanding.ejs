@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Membership Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/gamesuitelogo.png">
+  <style>
+    body {
+      background-color: #778dfc;
+      font-family: 'Kanit', sans-serif;
+      color: white;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+
+    .logo {
+      width: 250px;
+      height: auto;
+    }
+
+    .header-image {
+      width: 500px;
+      margin: 30px auto 10px auto;
+      display: block;
+    }
+
+    .button-container {
+      position: relative;
+      width: 100%;
+      height: 600px; /* Adjust height to fit all buttons */
+      margin-top: 60px;
+    }
+
+    /* Make each form (button wrapper) absolutely positioned */
+    .signup-btn,
+    .status-btn,
+    .renew-btn {
+      position: absolute;
+    }
+
+    /* Base button styling */
+    .membership-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: transform 0.3s;
+    }
+
+    .membership-button:hover {
+      transform: scale(1.05);
+    }
+
+    /* Adjust buttons individually here */
+    .signup-btn {
+      top: -10px;
+      left: 0px;
+    }
+
+    .status-btn {
+      top: 170px;
+      left: 710px;
+    }
+
+    .renew-btn {
+      top: 350px;
+      left: 0px;
+    }
+
+    /* Image sizes */
+    .signup-btn img,
+    .status-btn img,
+    .renew-btn img {
+      width: 1200px;
+      height: auto;
+    }
+
+    /* Back Button as Image */
+    .membership-back-btn {
+      display: block;
+      position: absolute;
+      bottom: -60px;
+      left: 1670px;
+      top: 720px;
+      width: 500px;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .membership-back-btn img {
+      width: 30%;
+      height: auto;
+    }
+
+    .membership-back-btn:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Logo -->
+  <div class="logo-container">
+    <img src="/images/gamesuitelogoleft.png" alt="Game Suite Logo" class="logo" />
+  </div>
+
+  <!-- Header Image -->
+  <img src="/images/membershipheaderlogo.png" alt="GameSuite Membership" class="header-image">
+
+  <!-- Button Container with Absolute Positioning -->
+  <div class="button-container">
+
+    <form action="/membership/membershipsignup" method="GET" class="signup-btn">
+      <button type="submit" class="membership-button">
+        <img src="/images/pendaftaranmembershipbutton.png" alt="Daftar Membership">
+      </button>
+    </form>
+
+    <form action="/membership/membershipstatuscheck" method="GET" class="status-btn">
+      <button type="submit" class="membership-button">
+        <img src="/images/pengecekanmembershipbutton.png" alt="Cek Status Membership">
+      </button>
+    </form>
+
+    <form action="/membership/membershiprenew" method="GET" class="renew-btn">
+      <button type="submit" class="membership-button">
+        <img src="/images/pembaruanmembershipbutton.png" alt="Perpanjang Membership">
+      </button>
+    </form>
+
+  </div>
+
+  <!-- Back Button as Image -->
+  <a href="/dashboard" class="membership-back-btn">
+    <img src="/images/backbutton.png" alt="Back to Dashboard">
+  </a>
+
+</body>
+</html>

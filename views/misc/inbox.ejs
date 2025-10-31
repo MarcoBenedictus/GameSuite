@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Inbox</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/gamesuitelogo.png">
+  <style>
+    body {
+      background-color: #778dfc;
+      font-family: 'Kanit', sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .logo {
+      width: 250px;
+    }
+
+    .header-image {
+      width: 500px;
+      margin: 30px auto;
+      display: block;
+    }
+
+    .inbox-container {
+      max-width: 600px;
+      margin: 100px auto;
+      padding: 0;
+      background-color: #3e4a95;
+      border-radius: 15px;
+      max-height: 250px;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .inbox-header {
+      background-color: #3e4a95;
+      position: sticky;
+      top: 0;
+      padding: 10px 0;
+      z-index: 2;
+    }
+
+    .inbox-header h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .chat-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      background-color: white;
+      color: black;
+      padding: 10px 15px;
+      margin: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .chat-link:hover {
+      background-color: #f0f0f0;
+    }
+
+    .chat-link .user {
+      font-weight: bold;
+    }
+
+    .chat-link .preview {
+      color: gray;
+      font-size: 0.9em;
+    }
+
+    .back-image {
+      display: block;
+      margin: 40px auto;
+      width: 110px;
+    }
+
+    .back-image:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="logo-container">
+    <img src="/images/gamesuitelogoleft.png" class="logo" />
+  </div>
+
+  <img src="/images/chatinbox.png" class="header-image" />
+
+  <div class="inbox-container">
+    <div class="inbox-header">
+      <h2>
+        <%= role==='admin' ? 'Admin Inbox' : 'Your Chat Options' %>
+      </h2>
+    </div>
+
+    <% users.forEach(user=> { %>
+      <a href="<%= user.username === 'ai' ? '/misc/chat/ai' : (username === 'marco' ? '/misc/chat/' + user.username : '/misc/chat') %>"
+        class="chat-link">
+        <span class="user">
+          <%= user.label || user.username %>
+        </span>
+        <% if (role==='admin' ) { %>
+          <span class="preview">
+            <%= user.lastMessage %> · <%= user.timestamp %>
+          </span>
+          <% } %>
+      </a>
+      <% }) %>
+  </div>
+
+  <a href="<%= role === 'admin' ? '/admin/admindashboard' : '/dashboard' %>">
+    <img src="/images/backbutton.png" alt="Back" class="back-image">
+  </a>
+
+</body>
+
+</html>

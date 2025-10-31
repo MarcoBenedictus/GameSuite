@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Membership Signup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/gamesuitelogo.png">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #778dfc;
+      font-family: 'Kanit', sans-serif;
+      color: white;
+      position: relative;
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .logo {
+      width: 250px;
+    }
+
+    .header-image {
+      width: 600px;
+      position: absolute;
+      top: 10px;
+      left: 32.5%;
+    }
+
+    .form-group {
+      position: absolute;
+    }
+
+    /* Adjust these to match the look and layout */
+    .form-email {
+      top: 260px;
+      left: 400px;
+    }
+
+    .form-name {
+      top: 260px;
+      left: 950px;
+    }
+
+    .form-phone {
+      top: 370px;
+      left: 400px;
+    }
+
+    .form-gender {
+      top: 490px;
+      left: 400px;
+    }
+
+    .form-membership {
+      top: 580px;
+      left: 400px;
+    }
+
+    .form-group label {
+      font-size: 1.5rem;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      border-radius: 20px;
+      padding: 12px 20px;
+      font-size: 2rem;
+      border: none;
+      outline: none;
+      width: 450px;
+      text-align: center;
+      background: white;
+      color: black;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      font-size: 1.5rem;
+    }
+
+    .radio-group input {
+      margin-right: 10px;
+      transform: scale(1.5);
+    }
+
+    .submit-btn {
+      position: absolute;
+      top: 600px;
+      left: 1570px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .submit-btn img {
+      width: 250px;
+      transition: transform 0.3s;
+    }
+
+    .submit-btn img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-container">
+    <img src="/images/gamesuitelogoleft.png" alt="Game Suite Logo" class="logo" />
+  </div>
+
+  <img src="/images/membershipsignupheader.png" alt="Membership Header" class="header-image" />
+
+  <form action="/membership/membershipsignup" method="POST">
+
+    <div class="form-group form-email">
+      <label>Email:</label>
+      <input type="text" name="email" value="<%= email %>" readonly />
+    </div>
+
+    <div class="form-group form-name">
+      <label>Name:</label>
+      <input type="text" name="name" value="<%= username %>" readonly />
+    </div>
+
+    <div class="form-group form-phone">
+      <label>Phone Number:</label>
+      <input type="text" name="phoneNumber" pattern="\d*" required />
+    </div>
+
+    <div class="form-group form-gender">
+      <label>Gender:</label>
+      <div class="radio-group">
+        <label><input type="radio" name="gender" value="Male" required> Male</label>
+        <label><input type="radio" name="gender" value="Female"> Female</label>
+      </div>
+    </div>
+
+    <div class="form-group form-membership">
+      <label>Membership Type:</label>
+      <div class="radio-group">
+        <label><input type="radio" name="membership" value="Premium" required> Premium</label>
+        <label><input type="radio" name="membership" value="Deluxe"> Deluxe</label>
+      </div>
+      <p style="font-size: 1.3rem; margin-top: 10px;">
+        <strong>50% OFF ONLY for First time Sign Up! </strong><br>
+        Premium: <del>150.000</del> → <span style="color: #ffd700;">75.000</span><br>
+        Deluxe: <del>250.000</del> → <span style="color: #ffd700;">125.000</span>
+      </p>
+    </div>
+
+    <button type="submit" class="submit-btn">
+      <img src="/images/lanjutkepembayaranbutton.png" alt="Proceed to Payment" />
+    </button>
+
+  </form>
+
+</body>
+</html>

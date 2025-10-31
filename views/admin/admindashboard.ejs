@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/gamesuitelogo.png">
+  <style>
+    body {
+      background-color: #778dfc;
+      font-family: 'Kanit', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: white;
+      position: relative;
+      height: 100vh;
+    }
+
+    .top-bar {
+      position: relative;
+      width: 100%;
+      height: 120px;
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+
+    .logo {
+      width: 250px;
+      height: auto;
+    }
+
+    .top-links {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      display: flex;
+      gap: 20px;
+    }
+
+    .top-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    .top-links a:hover {
+      opacity: 0.7;
+    }
+
+    .welcome-text {
+      position: absolute;
+      top: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    .button-container {
+      position: relative;
+      width: 100%;
+      height: 400px;
+    }
+
+    .ruangan-button,
+    .membership-button {
+      position: absolute;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      transition: filter 0.3s ease;
+    }
+
+    .ruangan-button {
+      width: 720px;
+      height: auto;
+      top: 300px;
+      left: 0px;
+    }
+
+    .membership-button {
+      width: 800px;
+      height: auto;
+      top: 300px;
+      right: 0px;
+    }
+
+    .ruangan-button:hover,
+    .membership-button:hover {
+      transform: scale(1.05);
+      filter: brightness(85%);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="logo-container">
+      <img src="/images/gamesuitelogoleft.png" alt="Game Suite Logo" class="logo" />
+    </div>
+
+    <div class="top-links">
+      <a href="/misc/inbox">💬 Open Inbox</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+
+  <!-- Welcome Message -->
+  <div class="welcome-text">
+    <h1>Welcome back, <%= username %>!</h1>
+    <p>What will you do today?</p>
+  </div>
+
+  <!-- Admin Action Buttons -->
+  <div class="button-container">
+    <a href="/admin/adminruangan">
+      <img src="/images/ruanganbutton.png" alt="Admin Ruangan" class="ruangan-button" />
+    </a>
+    <a href="/admin/adminmembership">
+      <img src="/images/membershipbutton.png" alt="Admin Membership" class="membership-button" />
+    </a>
+  </div>
+
+</body>
+</html>

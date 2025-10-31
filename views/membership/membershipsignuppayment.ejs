@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Membership Signup Payment</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/gamesuitelogo.png">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #778dfc;
+      font-family: 'Kanit', sans-serif;
+      color: white;
+      position: relative;
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .logo {
+      width: 250px;
+      height: auto;
+    }
+
+    .header-image {
+      width: 600px;
+      margin: 30px auto 10px auto;
+      display: block;
+      position: absolute;
+      top: 10px;
+      left: 33.5%;
+    }
+
+    h1 {
+      position: absolute;
+      top: 270px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+    }
+
+    .radio-img-option {
+      position: absolute;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .radio-img-option img {
+      width: 300px;
+      opacity: 0.65;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .radio-img-option input[type="radio"] {
+      display: none;
+    }
+
+    .radio-img-option:hover img {
+      transform: scale(1.03);
+    }
+
+    #ewallet-option input:checked + img,
+    #mbanking-option input:checked + img {
+      opacity: 1;
+      transform: scale(1.10);
+    }
+
+    #ewallet-option {
+      top: 400px;
+      left: 980px;
+      width: 400px;
+    }
+
+    #mbanking-option {
+      top: 400px;
+      left: 450px;
+      width: 400px;
+    }
+
+    #ewallet-option img,
+    #mbanking-option img {
+      width: 100%;
+      height: auto;
+    }
+
+    .submit-btn {
+      position: absolute;
+      top: 600px;
+      left: 1550px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .submit-btn img {
+      width: 250px;
+      transition: transform 0.3s;
+    }
+
+    .submit-btn img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const options = document.querySelectorAll('.radio-img-option');
+
+      options.forEach(option => {
+        option.addEventListener('click', () => {
+          option.querySelector('input').checked = true;
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="logo-container">
+    <img src="/images/gamesuitelogoleft.png" alt="Game Suite Logo" class="logo" />
+  </div>
+
+  <img src="/images/membershipsignupheader.png" alt="Membership Header" class="header-image">
+
+  <h1>Complete your membership payment</h1>
+
+  <form action="/membership/membershipsignuppayment" method="POST">
+    <!-- E-wallet Option -->
+    <label class="radio-img-option" id="ewallet-option">
+      <input type="radio" id="ewallet" name="paymentMethod" value="E-wallet" required>
+      <img src="/images/ewalletbutton.png" alt="E-wallet">
+    </label>
+
+    <!-- M-banking Option -->
+    <label class="radio-img-option" id="mbanking-option">
+      <input type="radio" id="mbanking" name="paymentMethod" value="M-banking">
+      <img src="/images/mbankingbutton.png" alt="M-banking">
+    </label>
+
+    <button type="submit" class="submit-btn">
+      <img src="/images/lanjutkepembayaranbutton.png" alt="Lanjut ke Pembayaran">
+    </button>
+  </form>
+</body>
+</html>

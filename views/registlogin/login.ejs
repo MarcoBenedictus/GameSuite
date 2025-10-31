@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/images/gamesuitelogo.png">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background: url("/images/userlogin.png") no-repeat center center;
+            background-size: contain;
+            background-color: #778dfc;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .form-container {
+            position: absolute;
+            top: 24.1%;
+            left: 21.5%;
+            width: 50%;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 105px;
+            position: relative; /* Allows absolute positioning of error message */
+        }
+
+        input {
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 30px;
+            padding: 15px 20px;
+            background: transparent;
+            color: #1b286b;
+            outline: none;
+            caret-color: black;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        input::placeholder {
+            color: #1b286b;
+            opacity: 0.8;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            position: absolute;
+            bottom: -20px;
+            left: 1.7%;
+            font-size: 1.2rem;
+            margin-top: 10px; /* Adjust space between the inputs and error message */
+            white-space: nowrap;
+        }
+
+        a {
+            color: white;
+        }
+
+        .login-button-wrapper {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        button {
+            width: 600px;
+            height: 90px;
+            background-image: url("/images/loginbutton.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: transparent;
+            border: none;
+            transition: filter 0.3s ease;
+            cursor: pointer;
+        }
+
+        button:hover {
+            filter: brightness(85%);
+        }
+
+        .register-link {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 1.5rem;
+            color: white;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .forgot-password-link {
+            position: absolute;
+            bottom: 265px;
+            left: 29%;
+            border: none;
+            border-radius: 20px;
+            padding: 15px 20px;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 2rem;
+            background-color: #778dfc;
+            color: black;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .forgot-password-link a {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="login-form" class="form-container" action="/registlogin/login" method="POST">
+        <input type="text" name="emailOrUsername" placeholder="Username or Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+            <p class="error-message">
+                <%= error %>
+            </p>
+        <% } %>
+    </form>
+
+    <div class="login-button-wrapper">
+        <button type="submit" form="login-form"></button>
+    </div>
+
+    <div class="forgot-password-link">
+        <a href="/registlogin/forgotpassword">Forgot password?</a>
+    </div>
+
+    <div class="register-link">
+        Don't have an account? <a href="/registlogin/register">Register here</a>
+    </div>
+</body>
+
+</html>

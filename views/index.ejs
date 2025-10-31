@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="/images/gamesuitelogo.png">
+  <title>Game Suite</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .background {
+      width: 100%;
+      height: 100%;
+      background-image: url("/images/userlandingpage.png");
+      background-size: 100%; /* Start with a larger image */
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #778dfc;  /* static background color */
+      position: relative;
+      animation: fadeInBackground 1s ease-out forwards; /* Animate scale of the background */
+    }
+
+    /* Animate the background scaling to create the fade-in effect */
+    @keyframes fadeInBackground {
+      0% {
+        background-size: 150%; 
+        filter: blur(10px); 
+      }
+      100% {
+        background-size: 80%; 
+        filter: blur(0px);  
+      }
+    }
+
+    .play-button-link {
+      position: absolute;
+      bottom: 95px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 80px;
+      cursor: pointer;
+      background-image: url("/images/userlandingpagebutton.png"); /* replace with your image path */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      border: none;
+      transition: filter 0.3s ease;  /* smooth transition */
+      opacity: 0;  /* Start invisible */
+      animation: fadeInTop 1s ease-out 0.5s forwards;  /* Button fade-in with delay */
+    }
+
+    .play-button-link:hover {
+      filter: brightness(85%);
+    }
+
+    @keyframes fadeInTop {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -30px);  /* Start off above */
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, 0);  /* End at the normal position */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background">
+    <a href="/registlogin/login" class="play-button-link"></a>
+  </div>
+</body>
+</html>

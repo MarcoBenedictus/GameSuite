@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Membership Active</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/gamesuitelogo.png">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #778dfc;
+      font-family: 'Kanit', sans-serif;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-top: 100px;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin: 20px 0;
+    }
+
+    a {
+      font-size: 1.5rem;
+      color: white;
+      text-decoration: none;
+      background-color: #3c66f7;
+      padding: 12px 20px;
+      border-radius: 20px;
+      transition: background-color 0.3s;
+    }
+
+    a:hover {
+      background-color: #2a4bb8;
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 0px;
+      left: 0;
+    }
+
+    .logo {
+      width: 250px;
+      position: absolute;
+      top: -103px;
+      left: 0px;
+    }
+
+    .header-image {
+      width: 600px;
+      position: absolute;
+      top: 10px;
+      left: 32.5%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-container">
+    <img src="/images/gamesuitelogoleft.png" alt="Game Suite Logo" class="logo" />
+  </div>
+
+  <h1>Hi <%= username %>!</h1>
+  <p>Kamu sudah punya Membership <strong><%= membershipType %></strong> Aktif.</p>
+  <p>Mohon untuk memperbaruinya melalui halaman Pembaruan Membership</p>
+  <p>atau menunggu <strong><%= remainingTime %></strong> hari lagi Sebelum melakukan Pendaftaran kembali.</p>
+  <a href="/membership/membershiplanding">Back to Membership Landing</a>
+
+</body>
+</html>

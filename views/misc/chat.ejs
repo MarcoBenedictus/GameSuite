@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat with <%= chattingWith || 'Admin' %></title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/gamesuitelogo.png">
+  <script src="/socket.io/socket.io.js"></script>
+
+  <style>
+    body {
+      font-family: 'Kanit', sans-serif;
+      background-color: #778dfc;
+      color: white;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+
+    .logo {
+      width: 250px;
+      height: auto;
+    }
+
+    .header-image {
+      width: 500px;
+      margin: 30px auto 20px auto;
+      display: block;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    #chat-container {
+      width: 500px;
+      height: 400px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 15px;
+      padding: 15px;
+      overflow-y: scroll;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      color: black;
+    }
+
+    #messages {
+      list-style: none;
+      padding: 0;
+    }
+
+    #messages li {
+      max-width: 70%;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 15px;
+      display: inline-block;
+      clear: both;
+    }
+
+    .self {
+      background-color: #d0e3ff;
+      text-align: right;
+      float: right;
+    }
+
+    .other {
+      background-color: #f1f1f1;
+      text-align: left;
+      float: left;
+    }
+
+    #chatForm {
+      margin-top: 20px;
+    }
+
+    #message {
+      padding: 10px;
+      width: 300px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      background-color: #334ac0;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #253899;
+    }
+
+    .back-image {
+      display: block;
+      margin: 40px auto 0 auto;
+      width: 110px;
+      transition: transform 0.3s;
+    }
+
+    .back-image:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Logo and Header -->
+  <div class="logo-container">
+    <img src="/images/gamesuitelogoleft.png" alt="Game Suite Logo" class="logo" />
+  </div>
+
+  <img src="/images/chatinbox.png" alt="Header" class="header-image">
+
+  <h2>Chat with <%= chattingWith || 'Admin' %></h2>
+
+  <!-- Hidden recipient field -->
+  <input type="hidden" id="recipient" value="<%= chattingWith || 'marco' %>">
+
+  <!-- Chat box -->
+  <div id="chat-container">
+    <ul id="messages">
+      <% messages.forEach(msg => { %>
+        <li class="<%= msg.sender === username ? 'self' : 'other' %>">
+          <%= msg.sender === username ? 'You' : msg.sender %>: <%= msg.message %>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+
+  <!-- Message input -->
+  <form id="chatForm">
+    <input id="message" autocomplete="off" placeholder="Type a message" />
+    <button type="submit">Send</button>
+  </form>
+
+  <!-- Back button -->
+  <a href="<%= username === 'marco' ? '/misc/inbox' : '/dashboard' %>">
+    <img src="/images/backbutton.png" alt="Back" class="back-image">
+  </a>
+
+  <!-- Socket script -->
+  <script>
+    const socket = io();
+    const username = "<%= username %>";
+    const recipient = document.getElementById('recipient').value;
+
+    socket.emit('registerUser', username);
+
+    document.getElementById('chatForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const msg = document.getElementById('message').value.trim();
+      if (!msg) return;
+
+      socket.emit('chatMessage', {
+        sender: username,
+        recipient,
+        message: msg
+      });
+
+      document.getElementById('message').value = '';
+    });
+
+    socket.on('chatMessage', function(data) {
+      if ((data.sender === username && data.recipient === recipient) ||
+          (data.sender === recipient && data.recipient === username)) {
+
+        const li = document.createElement('li');
+        li.className = data.sender === username ? 'self' : 'other';
+        li.textContent = `${data.sender === username ? 'You' : data.sender}: ${data.message}`;
+        document.getElementById('messages').appendChild(li);
+
+        const chatBox = document.getElementById('chat-container');
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    });
+  </script>
+</body>
+</html>

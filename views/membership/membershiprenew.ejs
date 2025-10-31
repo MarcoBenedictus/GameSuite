@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Renew Membership</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/gamesuitelogo.png">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #778dfc;
+      font-family: 'Kanit', sans-serif;
+      color: white;
+      position: relative;
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .logo {
+      width: 250px;
+    }
+
+    .header-image {
+      width: 600px;
+      position: absolute;
+      top: 10px;
+      left: 32.5%;
+    }
+
+    .membership-status {
+      position: absolute;
+      top: 260px;
+      left: 700px;
+      font-size: 1.8rem;
+    }
+
+    .membership-selection {
+      position: absolute;
+      top: 330px;
+      left: 660px;
+      display: flex;
+      gap: 50px;
+      justify-content: center;
+    }
+
+    .duration-selection {
+      position: absolute;
+      top: 500px;
+      left: 520px;
+      display: flex;
+      gap: 50px;
+      justify-content: center;
+    }
+
+    .membership-selection label,
+    .duration-selection label {
+      display: block;
+      width: 220px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .membership-selection img {
+      width: 100%;
+      transition: transform 0.3s, filter 0.3s;
+      opacity: 0.35;
+    }
+
+    .duration-selection img {
+      width: 100%;
+      transition: transform 0.3s, filter 0.3s;
+      opacity: 0.65;
+    }
+
+
+    .membership-selection img.selected,
+    .duration-selection img.selected {
+      transform: scale(1.08);
+      filter: brightness(1);
+      opacity: 1;
+    }
+
+    .charge-info {
+      position: absolute;
+      top: 455px;
+      left: 600px;
+      font-size: 1.5rem;
+      min-height: 30px;
+    }
+
+    .form-submit {
+      position: absolute;
+      top: 800px;
+      left: 800px;
+    }
+
+    .form-submit button {
+      background-color: #ffbf00;
+      color: white;
+      border: none;
+      padding: 14px 50px;
+      font-size: 22px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.3s;
+    }
+
+    .form-submit button:hover {
+      transform: scale(1.05);
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    .disabled {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="logo-container">
+    <img src="/images/gamesuitelogoleft.png" alt="Game Suite Logo" class="logo" />
+  </div>
+
+  <img src="/images/membershiprenewheader.png" alt="Membership Renew" class="header-image" />
+
+  <div class="membership-status">
+    Your current membership: <%= membershipType %>
+  </div>
+
+  <form action="/membership/membershiprenew" method="POST">
+
+    <div class="membership-selection">
+      <label>
+        <input type="radio" name="selectedMembership" value="Premium" id="premiumRadio" <%=membershipType==='Premium'
+          ? 'checked' : '' %> class="<%= membershipType==='Premium' ? 'disabled' : '' %>" required>
+          <img src="/images/premiumrenewbutton.png" id="premiumImage" alt="Premium">
+      </label>
+
+      <label>
+        <input type="radio" name="selectedMembership" value="Deluxe" id="deluxeRadio" <%=membershipType==='Deluxe'
+          ? 'checked' : '' %> class="<%= membershipType==='Deluxe' ? 'disabled' : '' %>" required>
+          <img src="/images/deluxerenewbutton.png" id="deluxeImage" alt="Deluxe">
+      </label>
+    </div>
+
+    <div class="charge-info" id="chargeInfo"></div>
+
+    <div class="duration-selection">
+      <label>
+        <input type="radio" name="selectedDuration" value="1" id="duration1" required>
+        <img src="/images/membership1months.png" id="durationImage1" alt="1 Month">
+      </label>
+
+      <label>
+        <input type="radio" name="selectedDuration" value="3" id="duration3">
+        <img src="/images/membership3months.png" id="durationImage3" alt="3 Months">
+      </label>
+
+      <label>
+        <input type="radio" name="selectedDuration" value="6" id="duration6">
+        <img src="/images/membership6months.png" id="durationImage6" alt="6 Months">
+      </label>
+    </div>
+
+    <div class="form-submit">
+      <button type="submit">Continue</button>
+    </div>
+
+  </form>
+
+  <script>
+    const premiumRadio = document.getElementById('premiumRadio');
+    const deluxeRadio = document.getElementById('deluxeRadio');
+    const premiumImage = document.getElementById('premiumImage');
+    const deluxeImage = document.getElementById('deluxeImage');
+
+    const currentMembership = '<%= membershipType %>';
+
+    // Lock and preselect based on current membership
+    if (currentMembership === 'Premium') {
+      premiumRadio.checked = true;
+      premiumRadio.disabled = true;
+      deluxeRadio.disabled = true;
+      premiumImage.classList.add('selected');
+    } else if (currentMembership === 'Deluxe') {
+      deluxeRadio.checked = true;
+      deluxeRadio.disabled = true;
+      premiumRadio.disabled = true;
+      deluxeImage.classList.add('selected');
+    }
+
+    // Duration highlighting stays normal
+    const durationImages = [
+      { radio: document.getElementById('duration1'), image: document.getElementById('durationImage1') },
+      { radio: document.getElementById('duration3'), image: document.getElementById('durationImage3') },
+      { radio: document.getElementById('duration6'), image: document.getElementById('durationImage6') },
+    ];
+
+    function highlightDuration() {
+      durationImages.forEach(d => {
+        d.image.classList.toggle('selected', d.radio.checked);
+      });
+    }
+
+    durationImages.forEach(d => {
+      d.radio.addEventListener('change', highlightDuration);
+    });
+
+    // Auto-highlight if returning to page
+    highlightDuration();
+  </script>
+
+</body>
+
+</html>

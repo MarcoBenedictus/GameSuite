@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>My Reservations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/images/gamesuitelogo.png">
+  <style>
+    body {
+      font-family: 'Kanit', sans-serif;
+      padding: 20px;
+      margin: 0;
+      background-color: #778dfc;
+      color: white;
+      text-align: center;
+    }
+
+    .header-image {
+      width: 500px;
+      margin: 20px auto;
+      display: block;
+    }
+
+    .container {
+      max-height: 600px;
+      overflow-y: auto;
+      border: 1px solid #001fbb;
+      padding: 15px;
+      background: #4e5dad;
+      border-radius: 10px;
+      margin: 0 auto;
+      width: 90%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: white;
+    }
+
+    th, td {
+      border: 1px solid #abb9ff;
+      padding: 10px;
+    }
+
+    th {
+      background-color: #2e3b99;
+    }
+
+    .back-button-container {
+      margin-top: 20px;
+    }
+
+    .back-button {
+      width: 120px;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .back-button:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <img src="/images/headermyreservation.png" alt="Header" class="header-image">
+
+  <h1>My Reservations</h1>
+
+  <div class="container">
+    <% if (reservations.length > 0) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Room</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Payment</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% reservations.forEach(r => { %>
+            <tr>
+              <td><%= r.room %></td>
+              <td><%= new Date(r.date).toLocaleDateString() %></td>
+              <td><%= new Date(r.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %> - <%= new Date(r.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %></td>
+              <td><%= r.paymentMethod || 'Not Paid' %></td>
+              <td><%= r.status || 'Pending' %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <p>You have no reservations yet.</p>
+    <% } %>
+  </div>
+
+  <div class="back-button-container">
+    <a href="/dashboard">
+      <img src="/images/backbutton.png" alt="Back" class="back-button">
+    </a>
+  </div>
+
+</body>
+</html>

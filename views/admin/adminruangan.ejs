@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Pilih Lantai Ruangan</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/gamesuitelogo.png">
+  <style>
+    body {
+      text-align: center;
+      background-color: #778dfc;
+      font-family: 'Kanit', sans-serif;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+
+    .logo {
+      width: 250px;
+      height: auto;
+    }
+
+    .header-image {
+      width: 700px;
+      margin: 30px auto 10px auto;
+      display: block;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: absolute;
+      left : 24%;
+      bottom: 250px;
+      gap: 40px;
+      margin-top: 30px;
+    }
+
+    .room-button {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    #adminlantai1,
+    #adminlantai2,
+    #adminlantai3 {
+      width: 300px;
+      transition: transform 0.3s;
+    }
+
+    #adminlantai1:hover,
+    #adminlantai2:hover,
+    #adminlantai3:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    .back-image {
+      display: block;
+      position: absolute;
+      bottom: 40px;
+      left: 47.5%;
+      margin: 80px auto 0 auto;
+      width: 110px;
+      transition: transform 0.3s;
+    }
+
+    .back-image:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar">
+    <div class="logo-container">
+      <img src="/images/gamesuitelogoleft.png" alt="Game Suite Logo" class="logo" />
+    </div>
+
+    <img src="/images/headeradminreservation.png" alt="Admin Reservation Header" class="header-image">
+
+    <div class="button-container">
+      <form action="/admin/adminruangan1">
+        <button type="submit" class="room-button">
+          <img id="adminlantai1" src="/images/adminlantai1.png" alt="Lantai 1">
+        </button>
+      </form>
+      <form action="/admin/adminruangan2">
+        <button type="submit" class="room-button">
+          <img id="adminlantai2" src="/images/adminlantai2.png" alt="Lantai 2">
+        </button>
+      </form>
+      <form action="/admin/adminruangan3">
+        <button type="submit" class="room-button">
+          <img id="adminlantai3" src="/images/adminlantai3.png" alt="Lantai 3">
+        </button>
+      </form>
+    </div>
+
+    <a href="/admin/admindashboard">
+      <img src="/images/backbutton.png" alt="Back" class="back-image">
+    </a>    
+
+  </div>
+
+</body>
+
+</html>
