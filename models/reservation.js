@@ -13,3 +13,5 @@ const reservationSchema = new mongoose.Schema({
 
 
 module.exports = mongoose.model('Reservation', reservationSchema);
+
+// Property of Marco - https://github.com/MarcoBenedictus

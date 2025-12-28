@@ -20,3 +20,5 @@ async function cleanUpExpiredReservations() {
 }
 
 module.exports = cleanUpExpiredReservations;
+
+// Property of Marco - https://github.com/MarcoBenedictus

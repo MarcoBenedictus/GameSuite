@@ -8,3 +8,5 @@ const chatSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Chat', chatSchema);
+
+// Property of Marco - https://github.com/MarcoBenedictus

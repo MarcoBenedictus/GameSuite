@@ -24,17 +24,14 @@ io.on('connection', (socket) => {
   });
 
   socket.on('chatMessage', async ({ sender, recipient, message }) => {
-    // 🚨 REMOVE THIS OLD LINE if it exists:
-    // io.emit('chatMessage', { sender, recipient, message });
-
-    // ✅ INSTEAD, add this broadcast logic:
+    // Emit message to sender and recipient
     for (let [id, sock] of io.of("/").sockets) {
       if (sock.username === sender || sock.username === recipient) {
         sock.emit('chatMessage', { sender, recipient, message });
       }
     }
 
-    // ✅ Save message to MongoDB
+    // Save message to MongoDB
     try {
       const newMsg = new Chat({ sender, recipient, message });
       await newMsg.save();
@@ -71,3 +68,5 @@ const PORT = process.env.PORT || 5000;
 http.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+// Property of Marco - https://github.com/MarcoBenedictus
